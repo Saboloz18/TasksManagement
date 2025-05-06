@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using TasksManagement.Persistance;
+using TasksManagement.Domain.SystemUsers;
 using TasksManagement.Persistance.Repositories.Users;
 using TasksManagement.Persistance.Repositories.WorkAssignments;
 using TasksManagement.Persistance.Repositories.Works;
@@ -19,10 +21,12 @@ namespace TasksManagement.Persistence
                 var dbContext = scope.ServiceProvider.GetRequiredService<TaskManagementDbContext>();
                 dbContext.Database.Migrate();
             }
+           
 
             services.AddScoped<IWorkRepository, WorkRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IWorkAssignmentRepository, WorkAssignmentRepository>();
+            services.AddScoped<Seed>();
 
             return services;
         }

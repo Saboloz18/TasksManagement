@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TasksManagement.Application.WorkAssignments.Queries.GetWorkAssignments;
 
@@ -6,6 +7,7 @@ namespace TasksManagement.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin,User")]
     public class AssignedWorksController : ControllerBase
     {
         private readonly IMediator _mediator;

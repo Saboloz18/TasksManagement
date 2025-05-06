@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using TasksManagement.Application.Exceptions;
 
 namespace TasksManagement.Infrastructure.Middleware
 {
@@ -73,7 +74,27 @@ namespace TasksManagement.Infrastructure.Middleware
                     {
                         Status = statusCode,
                         Message = DbUpdateEx.Message,
-                        InnerExceprion = DbUpdateEx.InnerException.Message
+                        InnerExceprion = DbUpdateEx.InnerException == null ? null : DbUpdateEx.InnerException.Message
+                    };
+                    break;    
+                
+                case UnauthorizedException UnauthorizedEx:
+                    statusCode = StatusCodes.Status401Unauthorized;
+                    errorResponse = new
+                    {
+                        Status = statusCode,
+                        Message = UnauthorizedEx.Message,
+                        InnerExceprion = UnauthorizedEx.InnerException == null ? null : UnauthorizedEx.InnerException.Message
+                    };
+                    break;            
+                
+                case RegistrationException RegistrationEx:
+                    statusCode = StatusCodes.Status400BadRequest;
+                    errorResponse = new
+                    {
+                        Status = statusCode,
+                        Message = RegistrationEx.Message,
+                        InnerExceprion = RegistrationEx.InnerException == null ? null : RegistrationEx.InnerException.Message
                     };
                     break;
 

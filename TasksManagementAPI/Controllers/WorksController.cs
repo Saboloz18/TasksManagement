@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TasksManagement.Application.Works.Commands.CreateWork;
 using TasksManagement.Application.Works.Commands.DeleteWork;
@@ -10,6 +11,7 @@ namespace TasksManagement.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin,User")]
     public class WorksController : ControllerBase
     {
         private readonly IMediator _mediator; private readonly ILogger _logger;
