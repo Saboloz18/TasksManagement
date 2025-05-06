@@ -3,6 +3,7 @@ using TasksManagement.Infrastructure.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 
 namespace TasksManagement.Infrastructure.Middleware
 {
@@ -63,6 +64,16 @@ namespace TasksManagement.Infrastructure.Middleware
                             Property = e.PropertyName,
                             Error = e.ErrorMessage
                         })
+                    };
+                    break;    
+                
+                case DbUpdateException DbUpdateEx:
+                    statusCode = StatusCodes.Status409Conflict;
+                    errorResponse = new
+                    {
+                        Status = statusCode,
+                        Message = DbUpdateEx.Message,
+                        InnerExceprion = DbUpdateEx.InnerException.Message
                     };
                     break;
 

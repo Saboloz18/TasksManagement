@@ -43,10 +43,10 @@ namespace TasksManagement.Presentation.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateWork(int id, [FromBody] UpdateWorkCommand command, CancellationToken cancellationToken)
+        [HttpPut()]
+        public async Task<IActionResult> UpdateWork([FromBody] UpdateWorkCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(new UpdateWorkCommand(id, command.Title, command.State, command.CurrentUserId), cancellationToken);
+            await _mediator.Send(command, cancellationToken);
             return Ok();
         }
 

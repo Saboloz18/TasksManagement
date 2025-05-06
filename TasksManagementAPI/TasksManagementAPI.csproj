@@ -21,6 +21,7 @@
     <ProjectReference Include="..\Application\TasksManagement.Application.csproj" />
     <ProjectReference Include="..\Domain\TasksManagement.Domain.csproj" />
     <ProjectReference Include="..\Persistance\TasksManagement.Persistance.csproj" />
+    <ProjectReference Include="..\TasksManagement.Infrastructure\TasksManagement.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
