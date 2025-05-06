@@ -1,4 +1,5 @@
 using TasksManagement.Application;
+using TasksManagement.Infrastructure.Middleware;
 using TasksManagement.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +21,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseGlobalExceptionHandler();
 
 app.UseHttpsRedirection();
 

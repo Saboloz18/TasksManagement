@@ -35,6 +35,7 @@ namespace TasksManagement.Persistance.Repositories.WorkAssignments
         {
             return await _context.WorkAssignments
                 .Include(wa => wa.User)
+                .Include(wa=>wa.Work)
                 .ToListAsync(cancellationToken);
         }
 

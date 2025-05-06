@@ -23,9 +23,9 @@ namespace TasksManagement.Persistance.EntityTypeConfiguration
                 .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasMany(w => w.AssignmentHistory)
-                .WithOne()
+                .WithOne(wa => wa.Work)
                 .HasForeignKey(wa => wa.WorkId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

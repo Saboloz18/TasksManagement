@@ -34,8 +34,6 @@ namespace TasksManagement.Application.Works.Commands.UpdateWork
             }
 
             work.Title = request.Title;
-            work.State = request.State;
-            work.CurrentUserId = request.CurrentUserId;
 
             await _workRepository.UpdateAsync(work, cancellationToken);
         }

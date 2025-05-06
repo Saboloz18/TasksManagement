@@ -1,16 +1,18 @@
-﻿using System;
+﻿using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TasksManagement.Domain.WorkAssignments;
 using TasksManagement.Domain.Works;
+using TasksManagement.Infrastructure.Exceptions;
 using TasksManagement.Persistance.Repositories.Users;
 using TasksManagement.Persistance.Repositories.Works;
 
 namespace TasksManagement.Application.WorkAssignments.Commands.AssignWork
 {
-    public class AssignWorkCommandHandler
+    public class AssignWorkCommandHandler : IRequestHandler<AssignWorkCommand>
     {
         private readonly IWorkRepository _workRepository;
         private readonly IUserRepository _userRepository;
@@ -23,12 +25,16 @@ namespace TasksManagement.Application.WorkAssignments.Commands.AssignWork
         public async Task Handle(AssignWorkCommand request, CancellationToken cancellationToken)
         {
             var work = await _workRepository.GetByIdAsync(request.WorkId, cancellationToken);
-            if (work == null) throw new InvalidOperationException("Work not found.");
+            if (work == null)
+            {
+                throw new NotFoundException("Work not found.");
+            }
 
             var users = await _userRepository.GetAllAsync(cancellationToken);
             if (!users.Any())
             {
                 work.State = WorkState.Waiting;
+                work.UpdateDate = DateTime.Now;
                 work.CurrentUserId = null;
                 await _workRepository.UpdateAsync(work, cancellationToken);
                 return;
@@ -39,6 +45,7 @@ namespace TasksManagement.Application.WorkAssignments.Commands.AssignWork
             if (allUsersAssigned)
             {
                 work.State = WorkState.Completed;
+                work.UpdateDate = DateTime.Now;
                 work.CurrentUserId = null;
                 await _workRepository.UpdateAsync(work, cancellationToken);
                 return;
@@ -72,7 +79,7 @@ namespace TasksManagement.Application.WorkAssignments.Commands.AssignWork
                     Cycle = work.AssignmentHistory.Any() ? work.AssignmentHistory.Max(wa => wa.Cycle) + 1 : 1
                 });
             }
-
+            work.UpdateDate = DateTime.Now;
             await _workRepository.UpdateAsync(work, cancellationToken);
         }
     }

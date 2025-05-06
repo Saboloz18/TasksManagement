@@ -10,8 +10,9 @@ namespace TasksManagement.Application.WorkAssignments.Queries.GetWorkAssignments
     {
         public int Id { get; set; }
         public int WorkId { get; set; }
+        public string WorkTitle { get; set; }
         public int UserId { get; set; }
-        public string UserName { get; set; } = string.Empty;
+        public string UserName { get; set; }
         public int Cycle { get; set; }
     }
 }

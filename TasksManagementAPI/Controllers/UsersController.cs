@@ -37,13 +37,13 @@ namespace TasksManagement.Presentation.Controllers
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command, CancellationToken cancellationToken)
         {
             var userId = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(GetUserById), new { id = userId }, null);
+            return Ok(userId);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserCommand command, CancellationToken cancellationToken)
+        [HttpPut()]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(new UpdateUserCommand(id, command.Name), cancellationToken);
+            await _mediator.Send(command, cancellationToken);
             return Ok();
         }
 
