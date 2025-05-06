@@ -21,19 +21,7 @@ namespace TasksManagement.Persistence
                 var dbContext = scope.ServiceProvider.GetRequiredService<TaskManagementDbContext>();
                 dbContext.Database.Migrate();
             }
-            services.AddIdentity<SystemUser, IdentityRole>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = true;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
-            })
-            .AddEntityFrameworkStores<TaskManagementDbContext>()
-            .AddDefaultTokenProviders();
+           
 
             services.AddScoped<IWorkRepository, WorkRepository>();
             services.AddScoped<IUserRepository, UserRepository>();

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TasksManagement.Application.Users.Commands.CreateUser;
 using TasksManagement.Application.Users.Commands.DeleteUser;
@@ -10,6 +11,8 @@ namespace TasksManagement.Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin,User")]
+
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -18,7 +21,6 @@ namespace TasksManagement.Presentation.Controllers
         {
             _mediator = mediator;
         }
-
         [HttpGet]
         public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
         {
