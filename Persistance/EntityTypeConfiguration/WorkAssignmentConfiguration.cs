@@ -18,6 +18,11 @@ namespace TasksManagement.Persistance.EntityTypeConfiguration
                 .WithMany()
                 .HasForeignKey(wa => wa.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(wa => wa.Work)
+                .WithMany(w => w.AssignmentHistory)
+                .HasForeignKey(wa => wa.WorkId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

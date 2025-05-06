@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TasksManagement.Domain.Users;
+using TasksManagement.Application.Works.Queries;
 
 namespace TasksManagement.Application.Users.Queries.GetUser
 {
@@ -12,7 +8,10 @@ namespace TasksManagement.Application.Users.Queries.GetUser
     {
         public UserMappingProfile()
         {
-            CreateMap<User, UserResponse>();
+            CreateMap<User, UserResponse>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dest => dest.AssignedWorks, opt => opt.MapFrom(src => src.AssignedWork));
         }
     }
 }
