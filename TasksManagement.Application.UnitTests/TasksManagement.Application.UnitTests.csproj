@@ -26,12 +26,4 @@
     <ProjectReference Include="..\Application\TasksManagement.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Works\Commands\CreateWork\" />
-    <Folder Include="Works\Commands\DeleteWork\" />
-    <Folder Include="Works\Commands\UpdateWork\" />
-    <Folder Include="Works\Queris\GetWork\" />
-    <Folder Include="Works\Queris\GetWorks\" />
-  </ItemGroup>
-
 </Project>
