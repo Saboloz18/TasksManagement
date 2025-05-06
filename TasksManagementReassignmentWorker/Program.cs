@@ -14,13 +14,19 @@ var reassignmentOptions = builder.Configuration
 builder.Services.AddQuartz(q =>
 {
     var jobKey = new JobKey("TaskReassignmentJob");
-
     q.AddJob<TaskReassignmentJob>(opts => opts.WithIdentity(jobKey));
 
     q.AddTrigger(opts => opts
+    .ForJob(jobKey)
+    .WithIdentity("ImmediateTrigger")
+    .StartNow());
+
+    q.AddTrigger(opts => opts
         .ForJob(jobKey)
-        .WithIdentity("TaskReassignmentTrigger")
-        .WithCronSchedule(reassignmentOptions.CronSchedule));
+        .WithIdentity("RecurringTrigger")
+        .WithCronSchedule(reassignmentOptions.CronSchedule, x =>
+            x.InTimeZone(TimeZoneInfo.Local)));
+
 });
 
 builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);

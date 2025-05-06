@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.Extensions.Logging;
 using Quartz;
 using TasksManagement.Application.WorkAssignments.Commands.AssignWork;
 using TasksManagement.Domain.Works;
