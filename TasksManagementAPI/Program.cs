@@ -22,6 +22,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+using (var scope = app.Services.CreateScope())
+{
+    var seeder = scope.ServiceProvider.GetRequiredService<Seed>();
+    await seeder.SeedAdminUserAsync();
+}
+
 app.UseGlobalExceptionHandler();
 
 app.UseHttpsRedirection();
