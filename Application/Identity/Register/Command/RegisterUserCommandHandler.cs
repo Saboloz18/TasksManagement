@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TasksManagement.Application.Exceptions;
 using TasksManagement.Domain.SystemUsers;
 
 namespace TasksManagement.Application.Identity.Register.Command
@@ -28,7 +29,7 @@ namespace TasksManagement.Application.Identity.Register.Command
             var result = await _userManager.CreateAsync(user, request.Password);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Failed to register user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                throw new RegistrationException($"Failed to register user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
             }
 
             await _userManager.AddToRoleAsync(user, request.Role);

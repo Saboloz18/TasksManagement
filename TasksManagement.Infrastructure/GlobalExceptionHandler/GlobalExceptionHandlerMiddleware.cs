@@ -74,7 +74,7 @@ namespace TasksManagement.Infrastructure.Middleware
                     {
                         Status = statusCode,
                         Message = DbUpdateEx.Message,
-                        InnerExceprion = DbUpdateEx.InnerException.Message
+                        InnerExceprion = DbUpdateEx.InnerException == null ? null : DbUpdateEx.InnerException.Message
                     };
                     break;    
                 
@@ -84,7 +84,17 @@ namespace TasksManagement.Infrastructure.Middleware
                     {
                         Status = statusCode,
                         Message = UnauthorizedEx.Message,
-                        InnerExceprion = UnauthorizedEx.InnerException.Message
+                        InnerExceprion = UnauthorizedEx.InnerException == null ? null : UnauthorizedEx.InnerException.Message
+                    };
+                    break;            
+                
+                case RegistrationException RegistrationEx:
+                    statusCode = StatusCodes.Status400BadRequest;
+                    errorResponse = new
+                    {
+                        Status = statusCode,
+                        Message = RegistrationEx.Message,
+                        InnerExceprion = RegistrationEx.InnerException == null ? null : RegistrationEx.InnerException.Message
                     };
                     break;
 
