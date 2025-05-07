@@ -1,5 +1,6 @@
 using Quartz;
 using TasksManagement.Application;
+using TasksManagement.Infrastructure;
 using TasksManagement.Persistence;
 using TasksManagementReassignmentWorker;
 
@@ -33,7 +34,7 @@ builder.Services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(dbConnectionString: builder.Configuration.GetConnectionString("DefaultConnection"));
-
+builder.Services.AddInfrastructure();
 builder.Services.AddTransient<TaskReassignmentJob>();
 
 
