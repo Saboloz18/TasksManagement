@@ -4,15 +4,19 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["TasksManagementReassignmentWorker/TasksManagementReassignmentWorker.csproj", "TasksManagementReassignmentWorker/"]
-RUN dotnet restore "./TasksManagementReassignmentWorker/TasksManagementReassignmentWorker.csproj"
+
+COPY ["TasksManagementReassignmentWorker/TasksManagementReassignmentWorker.csproj", "./"]
+RUN dotnet restore "./TasksManagementReassignmentWorker.csproj"
+
+
 COPY . .
+
 WORKDIR "/src/TasksManagementReassignmentWorker"
-RUN dotnet build "./TasksManagementReassignmentWorker.csproj" -c %BUILD_CONFIGURATION% -o /app/build
+RUN dotnet build "./TasksManagementReassignmentWorker.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./TasksManagementReassignmentWorker.csproj" -c %BUILD_CONFIGURATION% -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./TasksManagementReassignmentWorker.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
