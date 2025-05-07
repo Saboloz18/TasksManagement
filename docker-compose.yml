@@ -10,7 +10,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=db;Database=TasksManagement;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
+      - ConnectionStrings__DefaultConnection=Server=db;Database=TasksManagement;User Id=sa;Password=VeryStrongPassword@123;TrustServerCertificate=True;
     depends_on:
       - db
     networks:
