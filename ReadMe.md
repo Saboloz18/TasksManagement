@@ -51,7 +51,7 @@ cd TasksManagement
 
 ### 3. Access the API
 - Open `http://localhost:8080/swagger/index.html` in your browser to access the Swagger UI.
-- Use Auth endpoints to Log in with admin user - user:Admin password:Admin@123, copy token and pass it on for later requests
+- Use Auth endpoints to Log in with admin user - user:Admin password:Admin@123, copy token and pass it on for later requests, Dont forget "Bearer" in from of token, for example: Bearer {token}
 - Use the API endpoints to manage tasks (requires JWT authentication).
 
 
