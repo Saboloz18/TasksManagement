@@ -6,7 +6,7 @@ A task management system with an API and a background worker for task reassignme
 ## Notes
 - In assignment it was stated that we should have had Tasks and Users but changed Tasks to Works for clarity, beause it conflicted with Task class.
 - Added Authorization and Authentication
-- The ADMIN user is seeded on startup of an API user:Admin password:Admin@123
+- The ADMIN user is seeded on startup of an API. user:Admin password:Admin@123
 - Added Unit tests For business logic layer
 
 ## Project Architecture
