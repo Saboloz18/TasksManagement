@@ -59,7 +59,7 @@ cd TasksManagement
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Saboloz18/TasksManagement.git
 cd TasksManagement
 ```
 
