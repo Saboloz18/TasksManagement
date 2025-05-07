@@ -2,6 +2,13 @@
 
 A task management system with an API and a background worker for task reassignment, built with .NET 8.0 
 
+
+## Notes
+- In assignment it was stated that we should have had Tasks and Users but changed Tasks to Works for clarity, beause it conflicted with Task class.
+- Added Authorization and Authentication
+- The ADMIN user is seeded on startup of an API user:Admin password:Admin@123
+- Added Unit tests For business logic layer
+
 ## Project Architecture
 
 The project follows Clean Architecture with MediatR for CQRS. It is divided into layers:
@@ -17,10 +24,10 @@ The API handles client requests, the worker schedules task reassignments, and bo
 ## Technologies Used
 
 - **.NET 8.0**: Core framework for building the API and worker.
-- **Quartz.NET (3.8.0)**: Scheduling library for background task reassignment (`TasksManagementReassignmentWorker`).
-- **Entity Framework Core**: ORM for database access (`TasksManagement.Persistence`).
+- **Quartz.NET (3.8.0)**: Scheduling library for background task reassignment
+- **Entity Framework Core**: ORM for database access 
 - **MS SQL Server**: Database for storing tasks and user data.
-- **JWT Authentication**: Secures API endpoints (`TasksManagement.Infrastructure`).
+- **JWT Authentication**: Secures API endpoints 
 - **Docker & Docker Compose**: Containerization and orchestration for running services (API, worker, and database).
 - **Swagger/OpenAPI**: API documentation and testing interface (available in Development mode).
 
@@ -84,6 +91,4 @@ cd TasksManagement
 - The worker will start, executing the `TaskReassignmentJob` based on the cron schedule (`0 0/2 * * * ?` by default, every 2 minutes).
 
 
-## Notes
-- Ensure your SQL Server instance is accessible.
-- The ADMIN user is seeded on startup of an API user:Admin password:Admin@123
+
