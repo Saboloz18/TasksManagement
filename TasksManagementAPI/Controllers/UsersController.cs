@@ -21,6 +21,9 @@ namespace TasksManagement.Presentation.Controllers
         {
             _mediator = mediator;
         }
+        /// <summary>
+        /// Get List of Users
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetUsers(CancellationToken cancellationToken)
         {
@@ -28,6 +31,9 @@ namespace TasksManagement.Presentation.Controllers
             return Ok(users);
         }
 
+        /// <summary>
+        /// Get an user based on Id
+        /// </summary>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id, CancellationToken cancellationToken)
         {
@@ -35,6 +41,9 @@ namespace TasksManagement.Presentation.Controllers
             return Ok(user);
         }
 
+        /// <summary>
+        /// Create a new user
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand command, CancellationToken cancellationToken)
         {
@@ -42,6 +51,9 @@ namespace TasksManagement.Presentation.Controllers
             return Ok(userId);
         }
 
+        /// <summary>
+        /// Update an existing user's name
+        /// </summary>
         [HttpPut()]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command, CancellationToken cancellationToken)
         {
@@ -49,6 +61,9 @@ namespace TasksManagement.Presentation.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Delete an user
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id, CancellationToken cancellationToken)
         {

@@ -22,6 +22,9 @@ namespace TasksManagement.Presentation.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get List of Works
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetWorks(CancellationToken cancellationToken)
         {
@@ -30,6 +33,10 @@ namespace TasksManagement.Presentation.Controllers
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Get a work based on Id
+        /// </summary>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetWorkById(int id, CancellationToken cancellationToken)
         {
@@ -38,6 +45,10 @@ namespace TasksManagement.Presentation.Controllers
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Create a work
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> CreateWork([FromBody] CreateWorkCommand command, CancellationToken cancellationToken)
         {
@@ -45,6 +56,10 @@ namespace TasksManagement.Presentation.Controllers
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Update a work
+        /// </summary>
         [HttpPut()]
         public async Task<IActionResult> UpdateWork([FromBody] UpdateWorkCommand command, CancellationToken cancellationToken)
         {
@@ -52,6 +67,10 @@ namespace TasksManagement.Presentation.Controllers
             return Ok();
         }
 
+
+        /// <summary>
+        /// Delete a work
+        /// </summary>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteWork(int id, CancellationToken cancellationToken)
         {

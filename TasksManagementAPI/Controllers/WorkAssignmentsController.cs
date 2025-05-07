@@ -17,6 +17,9 @@ namespace TasksManagement.Presentation.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Get a list of currently assigned works and who they are assigned to
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> GetAssignedWorks(CancellationToken cancellationToken)
         {
